@@ -1,6 +1,7 @@
 package database
 
 import (
+	"fmt"
 	"log"
 	"os"
 
@@ -21,9 +22,8 @@ func ConnectToDB() {
 		log.Fatal("Error loading env file\n", err)
 	}
 
-	// dns := fmt.Sprintf("host=127.0.0.1 user=%s password=%s dbname=%s port=%s sslmode=disable TimeZone=Asia/Seoul",
-	// os.Getenv("PSQL_USER"), os.Getenv("PSQL_PASS"), os.Getenv("PSQL_DBNAME"), os.Getenv("PSQL_PORT"))
-	dns := "host=127.0.0.1 user=postgres password= dbname=testdb port=5432 sslmode=disable TimeZone=Asia/Seoul"
+	dns := fmt.Sprintf("host=127.0.0.1 user=%s password=%s dbname=%s port=%s sslmode=disable TimeZone=Asia/Seoul",
+		os.Getenv("PSQL_USER"), os.Getenv("PSQL_PASS"), os.Getenv("PSQL_DBNAME"), os.Getenv("PSQL_PORT"))
 
 	log.Print("Connectiong to PostgreSQL DB...")
 	DB, err = gorm.Open(postgres.Open(dns), &gorm.Config{})
